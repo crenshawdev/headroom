@@ -1,51 +1,12 @@
 {
   "layout": 1,
-  "cycleOpen": true,
+  "cycleOpen": false,
   "cursor": {
     "phase": 1,
     "status": "phase complete",
     "next": "/cad-milestone - the audit gate precedes any ship",
     "updated": "2026-11-23"
   },
-  "phases": [
-    {
-      "n": 1,
-      "name": "Context reminders",
-      "description": "When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.",
-      "status": "complete",
-      "plans": [
-        {
-          "file": "PLAN.md",
-          "finished": true
-        }
-      ]
-    }
-  ],
-  "requirements": [
-    {
-      "id": "REM-01",
-      "phase": 1,
-      "status": "Complete"
-    },
-    {
-      "id": "REM-02",
-      "phase": 1,
-      "status": "Complete"
-    },
-    {
-      "id": "REM-03",
-      "phase": 1,
-      "status": "Complete"
-    },
-    {
-      "id": "REM-04",
-      "phase": 1,
-      "status": "Complete"
-    },
-    {
-      "id": "NFR-01",
-      "phase": 1,
-      "status": "Complete"
-    }
-  ]
+  "phases": [],
+  "requirements": []
 }
