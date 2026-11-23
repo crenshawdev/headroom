@@ -1,0 +1,50 @@
+{
+  "phase": "1",
+  "trigger": "plan",
+  "discriminator": "plan-de58e47",
+  "round": 1,
+  "base": "de58e47",
+  "head": "de58e47",
+  "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+  "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+  "voices": [
+    {
+      "voice": "claude-subagent",
+      "model": "claude-opus-5-5"
+    }
+  ],
+  "citations": {
+    "checked": true
+  },
+  "entries": [
+    {
+      "voice": "claude-subagent",
+      "model": "claude-opus-5-5",
+      "file": ".planning/phases/1/PLAN.md",
+      "line": 95,
+      "severity": "medium",
+      "claim": "Task 4 says the AC3 case \"also pins that a missing reading doesn't reset\", but neither that case nor Task 3's missing-percent case can tell \"a missing reading leaves the next point alone\" apart from \"a missing reading resets it to the first point\". So D-06 and the must-be-true \"A turn with no fill reading shows nothing and moves nothing\" (line 28) have no check that can fail.",
+      "failure_scenario": "Suppose the hook is written `const p = e.context.percent ?? 0` or `if (!(p >= first)) next = first`, so a missing reading resets the next point to 33. Task 3 feeds 33 (toast, next=43), then missing (buggy reset to 33), then 43: the toast still fires, so the test passes. Task 4 feeds 33 and 43 (next=53), then 10 (reset to 33), then missing (buggy reset to 33, no change), then 33: the toast still fires, so the test passes. The bug ships. In a session, a turn with no reading after a toast at 33 then lets a reading of 34 to 42 toast again, which breaks REM-03's 10-point hold-off. Only a sequence like 33, missing, 40 expecting no toast at 40 would catch it, and no task has one.",
+      "ruling": "survived",
+      "convergent": false,
+      "fix_commit": "bfd09e0",
+      "citation_missing": true,
+      "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+      "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726"
+    },
+    {
+      "voice": "claude-subagent",
+      "model": "claude-opus-5-5",
+      "file": ".planning/phases/1/PLAN.md",
+      "line": 61,
+      "severity": "low",
+      "claim": "Task 2's Verify expects `claude plugin validate` to list the three `userConfig` fields, but validate in 2.1.330 never lists userConfig fields, so this part of the Verify cannot be met as written and checks nothing.",
+      "failure_scenario": "I ran `claude plugin validate` (text and `--json`) on an installed mod whose plugin.json declares 11 userConfig fields, including two `number` fields (agile-mods). The manifest section printed only `Validating plugin manifest: <path>`. Its JSON `manifest` object holds only errors, warnings, notes, gatingHooks, wasm and modules, with no field listing. An executor running Task 2 never sees the promised listing, so it either reports a false failure or skips the check. Either way nothing confirms the three fields and their bounds were read.",
+      "ruling": "survived",
+      "convergent": false,
+      "citation_missing": true,
+      "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+      "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726"
+    }
+  ]
+}

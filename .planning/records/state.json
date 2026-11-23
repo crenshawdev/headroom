@@ -1,20 +1,12 @@
 {
   "layout": 1,
-  "cycleOpen": true,
+  "cycleOpen": false,
   "cursor": {
     "phase": 1,
     "status": "ready to plan",
-    "next": "/cad-context 1",
+    "next": "/cad-phase add",
     "updated": "2026-11-23"
   },
-  "phases": [
-    {
-      "n": 1,
-      "name": "Context reminders",
-      "description": "When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.",
-      "status": "unplanned",
-      "plans": []
-    }
-  ],
+  "phases": [],
   "requirements": []
 }

@@ -1,0 +1,23 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26.13.1
+      - name: Create the coverage directory
+        run: mkdir -p coverage
+      - name: Run the tests with the coverage gate
+        run: |
+          node --test --experimental-test-coverage --test-coverage-include-all --test-coverage-include='src/**' --test-coverage-lines=85 --test-coverage-branches=85 --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info
+      - name: Guard against an empty coverage scope
+        run: grep -q '^LF:[1-9]' coverage/lcov.info
+      - name: Guard against a never-loaded file
+        run: "! grep -qx 'LH:0' coverage/lcov.info"

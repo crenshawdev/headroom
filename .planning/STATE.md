@@ -1,6 +1,6 @@
 # State
 
-Phase: 1 of 1 (Context reminders)
-Status: ready to plan
-Next: /cad-context 1
+No cycle is open: the last milestone is closed and the next one has not started.
+
+Next: /cad-phase add
 Updated: 2026-11-23

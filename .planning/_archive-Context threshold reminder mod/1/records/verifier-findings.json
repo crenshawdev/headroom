@@ -1,0 +1,98 @@
+{
+  "status": "gaps",
+  "score": "6/7",
+  "truths": [
+    {
+      "n": 1,
+      "truth": "With the default settings, readings of 32, 33, 40, 42 and 43 give exactly one toast naming /clear with timeoutMs 15000 at 33, none at 40 or 42, and the next at 43",
+      "status": "VERIFIED",
+      "uat_item": 1,
+      "evidence": "src/headroom.mjs:3 starts nextPoint at options.firstPoint, :9-13 toasts once with timeoutMs toastSeconds*1000 and moves nextPoint to percent+step; defaults 33/10/15 at .claude-plugin/plugin.json:9,17,25. Unit test 'default settings: toasts at 33 and then 10 points later, 15 s, naming /clear' (test/headroom.test.mjs:52, defaults read from the manifest at :7-8) passes in the CI command run. Value traced through the engine: 'the manifest defaults reach the mod' (test/headroom.plugin.test.tsx:25) passes under claude plugin test, the manifest default toastSeconds 15 landing as timeoutMs [15000, 15000] at the engine's ui.toast event. Spot-check with the real module: 33..43 step by step toasts only at 33 and 43; toast text 'Context is 33% full. Consider /clear to start fresh.' with {timeoutMs:15000}."
+    },
+    {
+      "n": 2,
+      "truth": "With the default settings, 60 right after 20 shows exactly one toast, 61 to 69 show none, and 70 shows the next (and 33 then 60 gives one toast at 60, the next at 70)",
+      "status": "VERIFIED",
+      "uat_item": 2,
+      "evidence": "src/headroom.mjs:13 sets nextPoint to the reading plus the step, not the old point plus the step. Unit test 'a jump gives one toast and the next comes a step above the jump' (test/headroom.test.mjs:63) passes, feeding 20, 60, 61, 65, 69, 70 with at most one toast per reading (:35). Spot-check over every reading: 20,60,61..69,70 toasts at 60x1 and 70x1 only; 33,60,61..69,70 toasts at 33x1, 60x1, 70x1."
+    },
+    {
+      "n": 3,
+      "truth": "After a toast at 43, a reading of 10 and then 33 toasts at 33; a missing reading shows no toast and leaves the next point where it was",
+      "status": "VERIFIED",
+      "uat_item": 3,
+      "evidence": "src/headroom.mjs:14-16 resets nextPoint to firstPoint on a numeric reading below it; :8 skips a non-number percent entirely (percent is optional per claude-code.d.ts SessionContextUsage, context itself is required at SessionMeasureInput, so no throw path). Unit tests 'a reading below the first point starts the reminders over' (test/headroom.test.mjs:82: 33,43,10,missing,33 -> toasts 33,43,33) and 'a missing reading shows nothing and moves nothing' (:76: 33,missing,40,43 -> 33,43, so a missing reading did not reset to 33) both pass. Spot-check without the gap: 33,43,10,33 -> 33x1,43x1,33x1."
+    },
+    {
+      "n": 4,
+      "truth": "Options set in settings (first point 20, step 5, toast seconds 30) make a reading of 20 toast with timeoutMs 30000 and the next come at 25",
+      "status": "VERIFIED",
+      "uat_item": 4,
+      "evidence": "src/headroom.mjs reads options.firstPoint (:3, :14, :16), options.step (:13) and options.toastSeconds (:11) with no fallback copy. Unit test 'first point, step and toast seconds come from the options' (test/headroom.test.mjs:69) passes. Traced through the engine: 'options set in settings change the timing and the duration' (test/headroom.plugin.test.tsx:35) passes with test(name, { options }), which the kit reads as values stored in settings (plugin-authoring reference.md:130); 20 lands as timeoutMs [30000] at ui.toast, 21 and 24 add none, 25 adds the second."
+    },
+    {
+      "n": 5,
+      "truth": "The mod hooks only session.measure and calls only $.ui.toast, so it never runs /clear, writes nothing to the transcript or the model and saves nothing between sessions",
+      "status": "VERIFIED",
+      "uat_item": 5,
+      "evidence": "claude plugin validate /code/headroom exit 0, 'Validation passed with warnings' (version, author only), listing '../src/headroom.mjs hooks: session.measure' and '../src/headroom.mjs calls: $.ui.toast' as the only entries. src/headroom.mjs:10 is the only $ use; the next point is a closure let (:3), no $.state or $.store; :20 passes the event on unchanged (unit test 'registers one pass-through hook on session.measure', test/headroom.test.mjs:41, passes). NFR-01 through the engine: 'the reminders add nothing to the session' (test/headroom.plugin.test.tsx:48) passes with mock.session(on).appended().length 0 after two toasts; the toast doc says it 'leaves the transcript and the model untouched' (claude-code.d.ts ui.toast)."
+    },
+    {
+      "n": 6,
+      "truth": "The accepted coverage commands pass at 85% lines and branches on src/** with both guards, the CI job test carries them verbatim, and claude plugin test /code/headroom exits 0",
+      "status": "VERIFIED",
+      "uat_item": 6,
+      "evidence": "One full run of the dispatched suite command on Node v26.13.1 (the version .github/workflows/test.yml:14 pins): 6 pass, 0 fail, exit 0, src/headroom.mjs 100% lines, 100% branches (lcov LF:22 LH:22 BRF:7 BRH:7); guard 'grep -q ^LF:[1-9]' exit 0, guard '! grep -qx LH:0' exit 0. Only test/headroom.test.mjs ran, not the .tsx file. .github/workflows/test.yml:8 names the job test, :16 creates coverage/, :19 starts with the policy's first command (thresholds 85/85) with reporter flags appended after it, :21 and :23 are the two guards; .github/cadence/coverage-policy.json unchanged since d44385b. claude plugin test /code/headroom: 3 pass, 0 fail, exit 0. The CI run itself was not observed here (no remote-tracking branch locally, network off-limits); that is cad-verify's ci-status read."
+    },
+    {
+      "n": 7,
+      "truth": "In a session started with claude --plugin-dir /code/headroom, a toast suggesting /clear shows once the fill reaches the first point and the transcript gets no line from the mod",
+      "status": "FAILED",
+      "uat_item": 7,
+      "evidence": "No automated check exercises the live session. AC7 is marked human-verify in CONTEXT.md and PLAN.md Task 3 Verify, and SUMMARY.md Open items leaves it to John. The CI job (.github/workflows/test.yml:19) runs node --test with fakes only; test/headroom.plugin.test.tsx:4-16 stands its own hooks in for the engine's session.measure and ui.toast, and reference.md:130 says the kit exercises the hooks 'not any surface's paint'. Covered already: loading as in a session, manifest defaults, the toast event, no session rows (truths 1, 4, 5). Not covered: the engine raising session.measure from a real turn on a --plugin-dir load, and the toast surfacing."
+    }
+  ],
+  "passes": [
+    {
+      "k": 1,
+      "name": "Default timing toasts at 33% and 43%",
+      "evidence": "test/headroom.test.mjs:52 'default settings: toasts at 33 and then 10 points later, 15 s, naming /clear' passes; test/headroom.plugin.test.tsx:25 'the manifest defaults reach the mod' passes through the engine with timeoutMs [15000, 15000]; src/headroom.mjs:9-13; manifest defaults .claude-plugin/plugin.json:9,17,25."
+    },
+    {
+      "k": 2,
+      "name": "A jump from 20% to 60% toasts once",
+      "evidence": "test/headroom.test.mjs:63 passes; spot-check over 20,60,61..69,70 toasts only at 60 (once) and 70; src/headroom.mjs:13 moves the next point to the reading plus the step."
+    },
+    {
+      "k": 3,
+      "name": "Reminders start over below the first point",
+      "evidence": "test/headroom.test.mjs:82 (33,43,10,missing,33 -> 33,43,33) and :76 (a missing reading does not reset) pass; src/headroom.mjs:8 and :14-16."
+    },
+    {
+      "k": 4,
+      "name": "The options change the timing and duration",
+      "evidence": "test/headroom.test.mjs:69 passes; test/headroom.plugin.test.tsx:35 passes through the engine with { options: 20/5/30 } read as settings: timeoutMs 30000 at 20, none at 21 and 24, the next at 25."
+    },
+    {
+      "k": 5,
+      "name": "Plugin validates with one hook and one $ call",
+      "evidence": "claude plugin validate /code/headroom exit 0, 'Validation passed with warnings' (version, author), hooks: session.measure, calls: $.ui.toast, nothing else; test/headroom.plugin.test.tsx:48 shows no session rows appended."
+    },
+    {
+      "k": 6,
+      "name": "Coverage gate and plugin tests pass",
+      "evidence": "Dispatched suite command on Node v26.13.1: 6/6 pass, exit 0, src/headroom.mjs 100% lines and branches, both lcov guards exit 0; .github/workflows/test.yml:19-23 carries the policy commands; claude plugin test /code/headroom: 3 pass, exit 0."
+    }
+  ],
+  "gaps": [
+    {
+      "k": 7,
+      "name": "Live session toasts with no transcript line",
+      "reason": "behavior wrong - no automated check exercises it: under the active testing policy a required acceptance criterion needs one, and AC7 was planned as human-verify only",
+      "evidence": ".planning/phases/1/CONTEXT.md AC7 and PLAN.md Task 3 Verify mark it human-verify; SUMMARY.md Open items leave it to John. .github/workflows/test.yml:19 runs node --test over fakes (test/headroom.test.mjs:11-28). test/headroom.plugin.test.tsx:4-16 stands its own session.measure and ui.toast hooks in for the engine and raises the event itself (:18-23); reference.md:130 says the kit checks hooks, not paint. Nothing loads /code/headroom through claude --plugin-dir and has the engine's own session.measure, from a real turn, cross the first point.",
+      "severity": "major",
+      "missing": "The smallest check that closes it: one automated run that loads /code/headroom the way claude --plugin-dir does, lets a real turn's session.measure carry a fill at or past the first point, and asserts one /clear toast with no transcript row from the mod. That needs a model turn, which the CI job test has no credentials for. Otherwise John decides AC7 explicitly, for example by accepting the three claude plugin test cases as its check. Cadence cannot drop the criterion on its own (test-policy.md, Acceptance criteria)."
+    }
+  ],
+  "human_checks": []
+}

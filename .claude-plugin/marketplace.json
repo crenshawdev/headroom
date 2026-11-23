@@ -1,0 +1,14 @@
+{
+  "name": "headroom",
+  "owner": {
+    "name": "John Crenshaw"
+  },
+  "description": "Headroom's own marketplace, so the plugin can be installed straight from this repository.",
+  "plugins": [
+    {
+      "name": "headroom",
+      "source": "./",
+      "description": "Reminds you to /clear with a toast when your session's context fills past a point you choose, then again each step after. The toast stays out of the transcript, so a reminder costs no tokens."
+    }
+  ]
+}
