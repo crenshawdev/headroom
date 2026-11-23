@@ -1,0 +1,30 @@
+{
+  "name": "headroom",
+  "description": "Suggests a /clear with a toast when the context fill reaches a set point, then again each step after.",
+  "userConfig": {
+    "firstPoint": {
+      "type": "number",
+      "title": "First reminder point",
+      "description": "Context fill, in percent, at which the first /clear reminder shows.",
+      "default": 33,
+      "min": 1,
+      "max": 100
+    },
+    "step": {
+      "type": "number",
+      "title": "Step between reminders",
+      "description": "Points the fill must rise after a reminder before the next one shows.",
+      "default": 10,
+      "min": 1,
+      "max": 100
+    },
+    "toastSeconds": {
+      "type": "number",
+      "title": "Toast seconds",
+      "description": "How long each reminder toast stays up, in seconds.",
+      "default": 15,
+      "min": 1,
+      "max": 300
+    }
+  }
+}
