@@ -41,7 +41,16 @@ When the context fill reaches the point the user set, a toast suggests a `/clear
 
 ### Active
 
-The requirements of the Seldon design "Context threshold reminder mod" are in REQUIREMENTS.md's `## Active`.
+No cycle open.
+
+The last cycle, the milestone "Context threshold reminder mod", closed on 2026-11-22.
+
+- Requirements: REM-01, REM-02, REM-03, REM-04 and NFR-01, all Complete.
+- Phases and commits: 1 phase (Context reminders), and 11 commits on `phase-1-context-reminders` ahead of `master`, through `204df4b`.
+- Audit: PASS. All 5 requirements trace to a phase, a plan and a verified checklist, and all 7 acceptance criteria reached a UAT item. AC7, the live-session check, was skipped as optional because no automated check can run a real model turn.
+- Manifest version: none. `.claude-plugin/plugin.json` has no `version`, and nothing has been tagged.
+- Where it lives now: the requirement rows are in REQUIREMENTS.md's `## Shipped`, the phase's documents are in `.planning/_archive-Context threshold reminder mod/1/`, and the residue is in `.planning/records/ARCHIVE.md`.
+- Still outstanding: the merge into `master` is `/cad-land`'s. Nothing has been pushed, so CI hasn't run on this work.
 
 ### Out of Scope
 
@@ -76,4 +85,4 @@ The requirements of the Seldon design "Context threshold reminder mod" are in RE
 |----------|-----------|---------|
 
 ---
-*Last updated: 2026-11-23 after starting the project from the Seldon design "Context threshold reminder mod"*
+*Last updated: 2026-11-22 after closing the milestone "Context threshold reminder mod"*

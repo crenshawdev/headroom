@@ -3,8 +3,8 @@
   "cycleOpen": false,
   "cursor": {
     "phase": 1,
-    "status": "phase complete",
-    "next": "/cad-milestone - the audit gate precedes any ship",
+    "status": "ready to plan",
+    "next": "/cad-phase add",
     "updated": "2026-11-23"
   },
   "phases": [],
