@@ -1,6 +1,7 @@
 {
   "name": "headroom",
   "description": "Suggests a /clear with a toast when the context fill reaches a set point, then again each step after.",
+  "version": "0.1.0",
   "userConfig": {
     "firstPoint": {
       "type": "number",
