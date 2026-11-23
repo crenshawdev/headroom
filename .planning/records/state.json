@@ -3,18 +3,54 @@
   "cycleOpen": true,
   "cursor": {
     "phase": 1,
-    "status": "context gathered",
-    "next": "/cad-plan 1",
-    "updated": "2026-11-23"
+    "status": "planned",
+    "next": "/cad-execute 1",
+    "updated": "2026-11-23",
+    "plan": {
+      "k": 1,
+      "j": 1,
+      "name": "Context reminder mod"
+    }
   },
   "phases": [
     {
       "n": 1,
       "name": "Context reminders",
       "description": "When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.",
-      "status": "unplanned",
-      "plans": []
+      "status": "planned",
+      "plans": [
+        {
+          "file": "PLAN.md",
+          "finished": false
+        }
+      ]
     }
   ],
-  "requirements": []
+  "requirements": [
+    {
+      "id": "REM-01",
+      "phase": 1,
+      "status": "Pending"
+    },
+    {
+      "id": "REM-02",
+      "phase": 1,
+      "status": "Pending"
+    },
+    {
+      "id": "REM-03",
+      "phase": 1,
+      "status": "Pending"
+    },
+    {
+      "id": "REM-04",
+      "phase": 1,
+      "status": "Pending"
+    },
+    {
+      "id": "NFR-01",
+      "phase": 1,
+      "status": "Pending"
+    }
+  ]
 }
