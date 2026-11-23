@@ -78,3 +78,9 @@ test('a missing reading shows nothing and moves nothing', async () => {
 
   assert.deepEqual(await toastedAt(mod, [33, undefined, 40, 43]), [33, 43])
 })
+
+test('a reading below the first point starts the reminders over', async () => {
+  const mod = load()
+
+  assert.deepEqual(await toastedAt(mod, [33, 43, 10, undefined, 33]), [33, 43, 33])
+})

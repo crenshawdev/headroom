@@ -5,11 +5,16 @@ export function register(on, options) {
   on('session.measure', ($, e, next) => {
     const percent = e.context.percent
 
-    if (typeof percent === 'number' && percent >= nextPoint) {
-      $.ui.toast(`Context is ${percent}% full. Consider /clear to start fresh.`, {
-        timeoutMs: options.toastSeconds * 1000,
-      })
-      nextPoint = percent + options.step
+    if (typeof percent === 'number') {
+      if (percent >= nextPoint) {
+        $.ui.toast(`Context is ${percent}% full. Consider /clear to start fresh.`, {
+          timeoutMs: options.toastSeconds * 1000,
+        })
+        nextPoint = percent + options.step
+      } else if (percent < options.firstPoint) {
+        // Under the first point means a /clear happened; start over.
+        nextPoint = options.firstPoint
+      }
     }
 
     return next(e)
