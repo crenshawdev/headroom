@@ -3,25 +3,20 @@
   "cycleOpen": true,
   "cursor": {
     "phase": 1,
-    "status": "planned",
-    "next": "/cad-execute 1",
-    "updated": "2026-11-23",
-    "plan": {
-      "k": 1,
-      "j": 1,
-      "name": "Context reminder mod"
-    }
+    "status": "executed",
+    "next": "/cad-verify 1",
+    "updated": "2026-11-23"
   },
   "phases": [
     {
       "n": 1,
       "name": "Context reminders",
       "description": "When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.",
-      "status": "planned",
+      "status": "executed",
       "plans": [
         {
           "file": "PLAN.md",
-          "finished": false
+          "finished": true
         }
       ]
     }
