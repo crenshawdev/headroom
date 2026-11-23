@@ -1,0 +1,109 @@
+{
+  "granularity": "standard",
+  "model": {
+    "escalate_on_failure": false
+  },
+  "workflow": {
+    "research": false,
+    "plan_check": false,
+    "verifier": true,
+    "skip_discuss": false,
+    "inline_plan_threshold": 3,
+    "max_plan_tasks": 8,
+    "test_command": null,
+    "lint_command": null
+  },
+  "parallelization": {
+    "enabled": true,
+    "max_concurrent_agents": 3,
+    "min_plans_for_parallel": 2,
+    "use_worktrees": true
+  },
+  "git": {
+    "protected_branches": [
+      "main",
+      "master"
+    ],
+    "on_protected": "ask",
+    "integration_branch": "milestone",
+    "auto_branch": "ask",
+    "base_branch": null,
+    "create_tag": true,
+    "on_land_cleanup": true,
+    "issue_check": true,
+    "auto_close": false,
+    "guard_bypass": true,
+    "forge_provider": "github",
+    "forge_repo": "crenshawdev/headroom",
+    "forge_host": null
+  },
+  "planning": {
+    "commit_docs": true
+  },
+  "memory": {
+    "backend": "builtin"
+  },
+  "review": {
+    "mode": "adjudicated",
+    "reviewers": [
+      "claude-subagent"
+    ],
+    "key_file": null,
+    "providers": {
+      "openai": {
+        "tiers": {
+          "flagship": null,
+          "balanced": null,
+          "cheap": null
+        }
+      },
+      "gemini": {
+        "tiers": {
+          "flagship": null,
+          "balanced": null,
+          "cheap": null
+        }
+      },
+      "deepseek": {
+        "tiers": {
+          "flagship": null,
+          "balanced": null,
+          "cheap": null
+        }
+      }
+    },
+    "consult": {
+      "enabled": false,
+      "tier": "flagship",
+      "effort": "high",
+      "attempt_threshold": 3
+    },
+    "decision_review": {
+      "tier": "flagship",
+      "effort": "high"
+    }
+  },
+  "testing": {
+    "scope": "focused",
+    "coverage": {
+      "lines": 85,
+      "branches": 85,
+      "statements": 0,
+      "include": [
+        "src/**"
+      ],
+      "exclude": [],
+      "commands": [
+        "node --test --experimental-test-coverage --test-coverage-include-all --test-coverage-include='src/**' --test-coverage-lines={lines} --test-coverage-branches={branches}",
+        "grep -q '^LF:[1-9]' coverage/lcov.info",
+        "! grep -qx 'LH:0' coverage/lcov.info"
+      ]
+    },
+    "strong_areas": [
+      "src/**"
+    ],
+    "required_jobs": [
+      "test"
+    ]
+  }
+}

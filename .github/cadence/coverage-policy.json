@@ -1,0 +1,23 @@
+{
+  "scope": "focused",
+  "coverage": {
+    "lines": 85,
+    "branches": 85,
+    "statements": 0,
+    "include": [
+      "src/**"
+    ],
+    "exclude": [],
+    "commands": [
+      "node --test --experimental-test-coverage --test-coverage-include-all --test-coverage-include='src/**' --test-coverage-lines={lines} --test-coverage-branches={branches}",
+      "grep -q '^LF:[1-9]' coverage/lcov.info",
+      "! grep -qx 'LH:0' coverage/lcov.info"
+    ]
+  },
+  "strong_areas": [
+    "src/**"
+  ],
+  "required_jobs": [
+    "test"
+  ]
+}
