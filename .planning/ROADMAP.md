@@ -6,7 +6,7 @@ The phases are the epics of the Seldon design "Context threshold reminder mod", 
 
 ## Phases
 
-- [ ] **Phase 1: Context reminders** - When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.
+- [x] **Phase 1: Context reminders** - When the context fill reaches the first reminder point, 33% unless the user sets another, a toast suggests a `/clear` for 15 seconds, and the next reminder comes only after the fill rises another 10 points, all without touching the transcript.
 
 ## Phase Details
 

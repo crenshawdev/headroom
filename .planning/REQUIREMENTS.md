@@ -37,11 +37,11 @@ Explicit exclusions. The reason prevents scope creep later.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| REM-01 | Phase 1 | Pending |
-| REM-02 | Phase 1 | Pending |
-| REM-03 | Phase 1 | Pending |
-| REM-04 | Phase 1 | Pending |
-| NFR-01 | Phase 1 | Pending |
+| REM-01 | Phase 1 | Complete |
+| REM-02 | Phase 1 | Complete |
+| REM-03 | Phase 1 | Complete |
+| REM-04 | Phase 1 | Complete |
+| NFR-01 | Phase 1 | Complete |
 
 Bare headers - `/cad-plan` seeds a row per requirement when its phase is
 planned (`references/req-traceability.md`).
