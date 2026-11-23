@@ -46,7 +46,7 @@ No cycle open.
 The last cycle, the milestone "Context threshold reminder mod", closed on 2026-11-22.
 
 - Requirements: REM-01, REM-02, REM-03, REM-04 and NFR-01, all Complete.
-- Phases and commits: 1 phase (Context reminders), and 11 commits on `phase-1-context-reminders` ahead of `master`, through `204df4b`.
+- Phases and commits: 1 phase (Context reminders), and 11 commits on `phase-1-context-reminders` ahead of `master`, through `40b15a1`.
 - Audit: PASS. All 5 requirements trace to a phase, a plan and a verified checklist, and all 7 acceptance criteria reached a UAT item. AC7, the live-session check, was skipped as optional because no automated check can run a real model turn.
 - Manifest version: 0.1.0 in `.claude-plugin/plugin.json`, set after the close. Nothing has been tagged.
 - Where it lives now: the requirement rows are in REQUIREMENTS.md's `## Shipped`, the phase's documents are in `.planning/_archive-Context threshold reminder mod/1/`, and the residue is in `.planning/records/ARCHIVE.md`.

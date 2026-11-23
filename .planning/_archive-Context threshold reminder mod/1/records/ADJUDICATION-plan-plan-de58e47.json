@@ -1,12 +1,12 @@
 {
   "phase": "1",
   "trigger": "plan",
-  "discriminator": "plan-b423cbe",
+  "discriminator": "plan-de58e47",
   "round": 1,
-  "base": "b423cbe",
-  "head": "b423cbe",
-  "base_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9",
-  "head_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9",
+  "base": "de58e47",
+  "head": "de58e47",
+  "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+  "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
   "voices": [
     {
       "voice": "claude-subagent",
@@ -27,10 +27,10 @@
       "failure_scenario": "Suppose the hook is written `const p = e.context.percent ?? 0` or `if (!(p >= first)) next = first`, so a missing reading resets the next point to 33. Task 3 feeds 33 (toast, next=43), then missing (buggy reset to 33), then 43: the toast still fires, so the test passes. Task 4 feeds 33 and 43 (next=53), then 10 (reset to 33), then missing (buggy reset to 33, no change), then 33: the toast still fires, so the test passes. The bug ships. In a session, a turn with no reading after a toast at 33 then lets a reading of 34 to 42 toast again, which breaks REM-03's 10-point hold-off. Only a sequence like 33, missing, 40 expecting no toast at 40 would catch it, and no task has one.",
       "ruling": "survived",
       "convergent": false,
-      "fix_commit": "889f942",
+      "fix_commit": "bfd09e0",
       "citation_missing": true,
-      "base_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9",
-      "head_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9"
+      "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+      "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726"
     },
     {
       "voice": "claude-subagent",
@@ -43,8 +43,8 @@
       "ruling": "survived",
       "convergent": false,
       "citation_missing": true,
-      "base_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9",
-      "head_id": "b423cbe7671423ad3e1b5d380c4324df1c6a6bd9"
+      "base_id": "de58e4739c0cdad0a01901c21309e95fc9202726",
+      "head_id": "de58e4739c0cdad0a01901c21309e95fc9202726"
     }
   ]
 }

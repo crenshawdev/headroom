@@ -21,11 +21,11 @@ A one-hook Claude Code mod that toasts a `/clear` reminder at 33% context fill (
 
 | Plan | Task | Commit | Description |
 |---|---|---|---|
-| 1 | 1 | af33db4 | Add the test workflow with the coverage gate |
-| 1 | 2 | 2006445 | Wire the plugin skeleton with a pass-through `session.measure` hook |
-| 1 | 3 | 860fc1f | Toast a `/clear` reminder at the first point and each step after |
-| 1 | 4 | d07bef4 | Restart reminders when the fill drops below the first point |
-| 1 | 5 | 4665133 | Raise real `session.measure` events through `claude plugin test` |
+| 1 | 1 | 5c50bd4 | Add the test workflow with the coverage gate |
+| 1 | 2 | c4a1035 | Wire the plugin skeleton with a pass-through `session.measure` hook |
+| 1 | 3 | c91f850 | Toast a `/clear` reminder at the first point and each step after |
+| 1 | 4 | cd6d82b | Restart reminders when the fill drops below the first point |
+| 1 | 5 | ca3b400 | Raise real `session.measure` events through `claude plugin test` |
 
 ## Deviations
 
